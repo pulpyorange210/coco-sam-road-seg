@@ -1,0 +1,23 @@
+device: "cuda"
+sam_checkpoint: "sam_vit_h_4b8939.pth"
+
+# Input/Output
+input_dir: "data/clips"
+output_dir: "outputs"
+
+# Video decode
+frame_stride: 1          # keep 1 for full fps; use 2/3 if slow
+max_frames: 150          # 10s*15fps = 150 (safety cap)
+
+# YOLO COCO detection
+yolo_model: "yolov8n.pt"
+conf_thres: 0.25
+iou_thres: 0.5
+
+# Keep only road-ish classes (COCO IDs)
+# 0 person, 1 bicycle, 2 car, 3 motorcycle, 5 bus, 7 truck
+keep_class_ids: [0, 1, 2, 3, 5, 7]
+
+# SAM post-filter
+max_instances_per_frame: 30
+min_area_frac: 0.001     # min mask area as fraction of image area
